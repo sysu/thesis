@@ -49,6 +49,9 @@
 \RequirePackage{setspace}
 \RequirePackage{datetime}
 \RequirePackage{nth}
+% package for mathematical plot
+\RequirePackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
 
 % 引入调整段落整体宽度的宏包
 \RequirePackage{changepage}
