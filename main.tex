@@ -43,8 +43,14 @@
         \newclearpage
         % 附录
     \appendix
-        \include{docs/appendix1}
-        \newclearpage
+        \foreach \i in {0,1,...,9}{
+            \foreach \j in {0,1,...,9}{
+                \IfFileExists{docs/appendix\i\j.tex}{
+                    \include{docs/appendix\i\j}
+                    \newclearpage
+                }{}
+            }
+        }
     \makeGrade      % 成绩评定记录表
 \end{document}
 
