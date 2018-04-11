@@ -49,6 +49,7 @@
 \RequirePackage{setspace}
 \RequirePackage{datetime}
 \RequirePackage{nth}
+\RequirePackage{tikz}
 % package for mathematical plot
 \RequirePackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
