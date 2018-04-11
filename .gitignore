@@ -27,10 +27,11 @@ missfont.log
 svn-commit.tmp
 sysuthesis.tar.gz
 中山大学本科毕业论文非官方LaTeX模版0.0.*.tar.gz
+*.synctex.gz
+/main.pdf
 
 *.swp
 
 node_modules/
 
 /.vscode
-/*.synctex.gz
