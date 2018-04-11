@@ -29,6 +29,8 @@ sysuthesis.tar.gz
 中山大学本科毕业论文非官方LaTeX模版0.0.*.tar.gz
 *.synctex.gz
 /main.pdf
+/main.fdb_latexmk
+/main.fls
 
 *.swp
 
