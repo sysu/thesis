@@ -11,6 +11,8 @@
         \pagenumbering{Roman}
         \maketitle    % 封面
         \makeProposal% 开题报告
+        % 直接拼入外部的开题报告单页PDF
+        %\makeProposalFromPdf{prebuilt/proposal.pdf}
         \makeProgressCheck  % 过程检查记录表
         \makeDefenseRecord  % 答辩情况等级表
         \makedisclaim       % 学术诚信声明
@@ -23,16 +25,14 @@
         % 引言
 
         % 正文
-        \include{docs/chap01}
-        \newclearpage
-        \include{docs/chap02}
-        \newclearpage
-        \include{docs/chap03}
-        \newclearpage
-        \include{docs/chap04}
-        \newclearpage
-        \include{docs/chap05}
-        \newclearpage
+        \foreach \i in {0,1,...,9}{
+            \foreach \j in {0,1,...,9}{
+                \IfFileExists{docs/chap\i\j.tex}{
+                    \include{docs/chap\i\j}
+                    \newclearpage
+                }{}
+            }
+        }
         % 结语
 
     % 附录部分
@@ -45,8 +45,14 @@
         \newclearpage
         % 附录
     \appendix
-        \include{docs/appendix1}
-        \newclearpage
+        \foreach \i in {0,1,...,9}{
+            \foreach \j in {0,1,...,9}{
+                \IfFileExists{docs/appendix\i\j.tex}{
+                    \include{docs/appendix\i\j}
+                    \newclearpage
+                }{}
+            }
+        }
     \makeGrade      % 成绩评定记录表
 \end{document}
 

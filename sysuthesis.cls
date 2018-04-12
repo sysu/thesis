@@ -49,6 +49,8 @@
 \RequirePackage{setspace}
 \RequirePackage{datetime}
 \RequirePackage{nth}
+\RequirePackage{tikz}
+\RequirePackage{pdfpages}
 % package for mathematical plot
 \RequirePackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
@@ -547,6 +549,10 @@
     \newclearpage
 }
 
+% Author: Perqin
+\newcommand\makeProposalFromPdf[1]{
+    \includepdf[pages={1}]{#1}
+}
 
 % Author:   Souler Ou
 % 修改者:    欧一锋

@@ -7,7 +7,7 @@
 基于以上理由, 本项目维护小组成立, 并**_诚邀各届校友参与开发维护, 为中大莘莘学子编写毕业论文提供方便_**
 
 ## 使用指南
-请移步到[项目wiki](https://gitlab.com/sysu-gitlab/latex-group/thesis/wikis/home)  
+使用前务必仔细阅读[项目wiki](https://gitlab.com/sysu-gitlab/latex-group/thesis/wikis/home)。
 _注意:　最新代码在dev分支上, 获取代码前请先确认分支._
 
 ## 致谢
