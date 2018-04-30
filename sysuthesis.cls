@@ -447,13 +447,11 @@
 
         %最后部分的表脚
         \hline
-        \multicolumn{1}{|>{\centering}m{\textwidth/4}|}{
-            \textbf{总体完成情况}
-            \newline
-            \newline
+        \multicolumn{1}{|>{\centering}m{\textwidth/3}|}{
+            \textbf{总体完成情况} \\
             \textbf{(Overall Assessment)}
         }&
-        \multicolumn{1}{m{\textwidth/4*3}|}{
+        \multicolumn{1}{m{\textwidth/3*2}|}{
             指导教师意见Comments from Supervisor:\newline
             \@finalcomment
             \vspace{\baselineskip}
