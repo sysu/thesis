@@ -319,6 +319,19 @@
 %     \newclearpage
 % }
 
+\newcommand\makeinstruction{
+    \ctexset {
+        chapter = {
+            titleformat = {\zihao{-2}\fangsong\bfseries},
+            beforeskip = {10pt},
+            afterskip = {40pt}
+        }
+    }
+    \input{docs/instruction}
+    \thispagestyle{empty}
+    \newclearpage
+}
+
 % 开题报告
 \newcommand\objective[1]{\def\@objective{#1}}
 \newcommand\methodology[1]{\def\@methodology{#1}}
