@@ -447,19 +447,24 @@
 
         %最后部分的表脚
         \hline
-        & 指导教师意见Comments from Supervisor: \\
-        &  \\
-        &  \\
-        &  \\
-        \newline
-        \textbf{总体完成情况} & 1、按计划完成，完成情况优（Excellent）：（\quad）\\
-        & 2、按计划完成，完成情况良（Good）：（\quad）\\
-        \textbf{(Overall Assessment)} & 3、基本按计划完成，完成情况合格（Fair）：（\quad）\\
-        & 4、完成情况不合格（Poor）：（\quad）\\
-        & \\
-        & 指导教师签名（Supervisor Signature）:\\
-        & 日期（Date）:\\
-        & \\
+        \multicolumn{1}{|>{\centering}m{\textwidth/4}|}{
+            \textbf{总体完成情况}
+            \newline
+            \newline
+            \textbf{(Overall Assessment)}
+        }&
+        \multicolumn{1}{m{\textwidth/4*3}|}{
+            指导教师意见Comments from Supervisor:\newline
+            \@finalcomment
+            \vspace{\baselineskip}
+            1、按计划完成，完成情况优（Excellent）：（\quad）\newline
+            2、按计划完成，完成情况良（Good）：（\quad）\newline
+            3、基本按计划完成，完成情况合格（Fair）：（\quad）\newline
+            4、完成情况不合格（Poor）：（\quad）\newline
+            \newline
+            指导教师签名（Supervisor Signature）:\newline
+            日期（Date）:\newline
+        }\\
         \hline
         \endlastfoot
 
@@ -476,7 +481,7 @@
             学生总结 \newline
             Student Self-Summary:
             \end{adjustwidth}
-            \@firstsummary 
+            \@firstsummary
             \begin{adjustwidth}{2em}{2em}
             指导教师意见 \newline
             Comments of Supervisor: \newline
