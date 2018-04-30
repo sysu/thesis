@@ -682,9 +682,11 @@
     \centerline{\songti\zihao{3}\bfseries{\@ctitle}}
 
     \zihao{5}\kaishu
-    \paragraph{\zihao{5}\heiti[摘\hspace{\ccwd}要]}
+    \paragraph{\zihao{5}\heiti【摘\hspace{\ccwd}要】}
     \@cabstract
-    \paragraph{\zihao{5}\heiti[关键词]}\@ckeywords
+    \vspace{\baselineskip}
+    \paragraph{\zihao{5}\heiti【关键词】}
+    \@ckeywords
 }
 
 % 英文摘要、关键字标题：小四号新罗马体(Time New Roman)加粗并加方括号
@@ -715,9 +717,11 @@
     \centerline{\zihao{3}\bfseries{\@eabstracttitlesecond}}
 
     \zihao{-4}
-    \paragraph{\textbf{[Abstract]}}
+    \paragraph{\zihao{4}\textbf{【Abstract】}}
     \@eabstract
-    \paragraph{\textbf{[Keywords]}}\@ekeywords
+    \vspace{\baselineskip}
+    \paragraph{\zihao{4}\textbf{【Keywords】}}
+    \@ekeywords
 }
 
 \newcommand\makeabstract{
