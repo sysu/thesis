@@ -1,88 +1,205 @@
 % 定义模板样式
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{sysuthesis}[2017/05/06 v4.5.3 Sun Yat-Sen University undergraduate thesis document class]
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexbook}}
-\ProcessOptions\relax
+\RequirePackage{kvoptions}% 控制模板选项宏包
+\SetupKeyvalOptions{
+  family=sysu,
+  prefix=sysu@,
+  setkeys=\kvsetkeys
+  }
+
+% 条件判断变量　内部是 sysu@ 外部用 \ifx \degree \bachelor or \master or \doctor
+% 声明了中英文选项，本科，硕士，博士
+\newif\ifsysu@chinese\sysu@chinesefalse
+\newif\ifsysu@english\sysu@englishfalse
+\newif\ifsysu@bachelor\sysu@bachelorfalse
+\newif\ifsysu@master\sysu@masterfalse
+\newif\ifsysu@doctor\sysu@doctorfalse
+
+
+\define@key{sysu}{type}{\expandafter\csname sysu@#1true\endcsname}
+\define@key{sysu}{language}{\expandafter\csname sysu@#1true\endcsname\def\sysu@language{#1}}
+%? 是否要声明一个选项来改变文章为电子版还是双面打印格式
+\DeclareBoolOption[false]{print}
+% 目录显示章节深度
+\DeclareStringOption[2]{tocdepth}
+% 是否开启debug模式（默认否）。如果开启，载入显示行号等的包，只为开发调试用。
+\DeclareBoolOption[false]{debug}
+
+\DeclareStringOption[fandol]{fontset}
+\ProcessKeyvalOptions*\relax
+% \ProcessOptions\relax
 
 \LoadClass[
-    %fontset=adobe,
-    fontset=fandol,    % texlive自带，可移植字体库，只有常用的6763个汉字
-    %fontset=ubuntu,
-    %fontset=mac,
-    %fontset=windows,
+    fontset=\sysu@fontset,
     a4paper,
     %openright,
     openany,
     zihao=-4
 ]{ctexbook}
 
-\def\@printtwoside{0} % 设置文章为电子版格式（不添加多余空白页）
-%\def\@printtwoside{1} % 设置文章为双面打印格式（添加多余空白页保证每个表格、章节开头为奇数页面）
+\RequirePackage{packages/packages}% 引用的宏包
 
-% 配置英文字体
-\RequirePackage{fontspec}
-\setmainfont{Times New Roman}
+\RequirePackage[print=\ifsysu@print true\else false\fi]{packages/command}
+\RequirePackage[\sysu@language, onelanguage,linesnumbered,algochapter,ruled,vlined]{packages/algorithm2e}
 
-\RequirePackage[margin=1in,headsep=.2in, headheight=2in]{geometry}
-\RequirePackage{fancyhdr}
-\RequirePackage{booktabs}
-\RequirePackage{calc}
-\RequirePackage{graphicx}
-\RequirePackage[labelsep=space]{caption}
-\RequirePackage[font=footnotesize]{subcaption}
-\RequirePackage{amsmath,amssymb,amsthm}
-\RequirePackage{listings}
-\RequirePackage{longtable}
-\RequirePackage[section]{placeins}
-\RequirePackage[chinese, onelanguage,linesnumbered,algochapter,ruled,vlined]{packages/algorithm2e}
-\RequirePackage{enumitem}
-\RequirePackage{bbm}
-\RequirePackage{bm}
-\RequirePackage[notlof,notlot,nottoc,numbib]{tocbibind} %table of content
-\RequirePackage{tocloft}
-\RequirePackage{wrapfig}
-\RequirePackage{colortbl}
-\RequirePackage{xcolor}
-\RequirePackage{array}
-\RequirePackage{makecell}
-\RequirePackage[bottom, perpage]{footmisc}
-\RequirePackage{setspace}
-\RequirePackage{datetime}
-\RequirePackage{nth}
-\RequirePackage{tikz}
-\RequirePackage{pdfpages}
-% package for mathematical plot
-\RequirePackage{pgfplots}
-\pgfplotsset{width=10cm,compat=1.9}
+% 加入 debug 的宏包
+\ifsysu@debug
+\RequirePackage{layout}
+\RequirePackage{layouts}
+\RequirePackage{lineno}
+\fi
 
-% 引入调整段落整体宽度的宏包
-\RequirePackage{changepage}
-
-% Insert a TRUE blank page which has no header or footer
-\let\origdoublepage\cleardoublepage
-\newcommand{\clearemptydoublepage}{
-    \clearpage{
-        \pagestyle{empty}
-        \origdoublepage
-    }
-}
-% 定义了一种新的clearpage方式，允许一个变量切换电子版及双面打印版
-\newcommand{\newclearpage}{
-    \if\@printtwoside1
-        \clearemptydoublepage
-    \else
-        \clearpage
+%% 语言和本科，硕士，博士 必须要声明，否则报错
+\ClassInfo{sysuthesis}{you had specified the language of this thesis:}
+\ifsysu@chinese
+    \ClassInfo{sysuthesis}{chinese}\gdef\lang{chinese}\gdef\sysucn{chinese}
+\else
+	\ifsysu@english
+	\ClassInfo{sysuthesis}{english}\gdef\lang{english}\gdef\sysuen{english}
+    \else\ClassError{sysuthesis}
+    {You have to specify the language of this thesis:english or chinese}
     \fi
-}
+\fi
+% 博士和硕士共有的条件变量 使用 ifthen 宏包　
+% \ifthenelse{\equal{\degree}{\master}\OR\equal{\degree}{\doctor}}{}{}
+% degree 控制主文件的条件编译 外部变量 \bachelor \master \doctor
+\gdef\bachelor{bachelor}\gdef\master{master}\gdef\doctor{doctor}
+\ifsysu@bachelor
+\ClassInfo{sysuthesis}{Specifed bachelor}
+\gdef\degree{bachelor}
+\else
+	\ifsysu@master
+    \ClassInfo{sysuthesis}{Specifed master}
+    \gdef\degree{master}
+    \else
+		\ifsysu@doctor\ClassInfo{sysuthesis}{Specifed doctor}
+        \gdef\degree{doctor}
+        \else
+				\ClassError{sysuthesis}
+				{You have to specify one of thesis options: bachelor, master or doctor.}
+		\fi
+	\fi
+\fi
+
+
+% 目录设定，使用tocloft宏包
+\setcounter{secnumdepth}{3} % depth of toc, 2
+\ifx \sysu@tocdepth 2
+\setcounter{tocdepth}{1}
+\fi
+% 如果要在目录中显示子章节请换用下面这行(目录中显示到x.y.z章)，如果不用这行默认显示到x.y章。
+\ifx \sysu@tocdepth 3
+\setcounter{tocdepth}{2}
+\fi
+\ifx \sysu@tocdepth 4
+\setcounter{tocdepth}{3}
+\fi
 
 % 设定时间为中文日期
 \ctexset{today=small}
+% 有序与无序列表环境
+\setlist[enumerate]{nosep}
+\renewcommand\labelenumi{\theenumi)}
+%\renewcommand\labelenumi{\theenumi.}
+%\renewcommand\theenumii{\@alph\c@enumii}
+%\renewcommand\theenumiii{\@roman\c@enumiii}
+\setlist[itemize]{nosep}
+\setlist[description]{nosep}
 
-% 定义英文日期格式
-\newcommand\etoday{
-  \hspace{0.5\ccwd} \monthname[\the\month]\hspace{2\ccwd} \nth{\the\day}{\hspace{1\ccwd}} \the\year
+% 页眉、页脚、脚注设定
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+% 采用带圈数字符号代替*号脚注
+\xeCJKsetcharclass{`①}{`⑩}{1}
+
+\setlength{\parindent}{24pt}	% two chinese char width
+
+% 表格与图片标题设定
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
+\renewcommand{\thetable}{\thechapter-\arabic{table}}
+\renewcommand\theequation{\arabic{chapter}-\arabic{equation}} 
+%\renewcommand\thealgorithm{\arabic{chapter}-\arabic{algorithm}} 
+
+\setlength\heavyrulewidth{0.2em}
+\captionsetup{font=small,format=hang}
+
+% 设置表格与图片标题的距离
+\setlength\abovecaptionskip{2\p@}
+\setlength\belowcaptionskip{2\p@}
+
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+	\begin{center}
+	#1\hspace{1em}#2
+	\end{center}
+  \vskip\belowcaptionskip}
+
+\newtheoremstyle{dotless}{3pt}{3pt}{\kaishu}{2em}{\heiti}{}{\ccwd}{}
+\theoremstyle{dotless}
+
+\ifsysu@chinese
+    \setlength{\cftsecindent}{2.3em}        % 小节缩进, 对齐章标题空隙
+\fi
+
+\ifsysu@chinese
+\newtheorem{theorem}{{定理}}[chapter]
+\newtheorem{proposition}{{命题}}[chapter]
+\newtheorem{lemma}{{引理}}[chapter]
+\newtheorem{corollary}{{推论}}[chapter]
+\newtheorem{definition}{{定义}}[chapter]
+\newtheorem{remark}{{注记}}[chapter]
+\newtheorem{eg}{例}[chapter]
+\renewcommand{\proofname}{{\heiti 证明}}
+
+\newtheorem{algo}{算法}[chapter]
+\newtheorem{conj}{猜想}[chapter]
+\newtheorem{case}{情形}
+
+\renewcommand{\contentsname}{目录}  
+\renewcommand{\figurename}{图}  
+\renewcommand{\tablename}{表}  
+\renewcommand{\bibname}{参考文献}
+\renewcommand{\appendixname}{附录}
+\renewcommand{\listfigurename}{插图目录}
+\renewcommand{\listtablename}{表格目录}
+
+\fi
+
+\ifsysu@english
+\newtheorem{theorem}{{theorem}}[chapter]
+\newtheorem{proposition}{{proposition}}[chapter]
+\newtheorem{lemma}{{lemma}}[chapter]
+\newtheorem{corollary}{{corollary}}[chapter]
+\newtheorem{definition}{{definition}}[chapter]
+\newtheorem{remark}{{remark}}[chapter]
+\newtheorem{eg}{eg}[chapter]
+\renewcommand{\proofname}{{Proof}}
+
+\renewcommand{\contentsname}{Contents}  
+\renewcommand{\figurename}{Figure}  
+\renewcommand{\tablename}{Table}  
+\renewcommand{\bibname}{Reference}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\listfigurename}{Figure Contents}
+\renewcommand{\listtablename}{Table Contents}
+\fi
+
+
+\renewenvironment{proof}[1][\proofname]{\par
+    \pushQED{\qed}
+    \kaishu \topsep6\p@\@plus6\p@\relax
+    \trivlist
+    \item[\hskip\labelsep
+                \itshape
+        #1]\ignorespaces
+}{
+    \popQED\endtrivlist\@endpefalse
 }
 
+% 引用本科或者硕士博士宏包
+\ifsysu@bachelor
 \AtBeginDocument{
     \hypersetup{
         citecolor=green,
@@ -98,26 +215,18 @@
 }
 \pagestyle{fancy}
 
-% 有序与无序列表环境
-\setlist[enumerate]{nosep}
-\renewcommand\labelenumi{\theenumi)}
-%\renewcommand\labelenumi{\theenumi.}
-\setlist[itemize]{nosep}
-\setlist[description]{nosep}
 
-% 页眉、页脚、脚注设定
-\renewcommand{\headrulewidth}{1pt}
-\renewcommand{\footrulewidth}{0pt}
-\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
-% 采用带圈数字符号代替*号脚注
-\xeCJKsetcharclass{`①}{`⑩}{1}
 % 默认页面页眉页脚样式
 \fancypagestyle{plain}{
     \fancyhf{}
     \fancyfoot[C]{\zihao{-5}\thepage} % 页码位于页脚居中
 
     % 左右两栏页眉，左为论文题目右为当前章
+    \ifx \lang \sysucn
     \fancyhead[L]{\zihao{-5}\@ctitle}
+    \else
+    \fancyhead[L]{\zihao{-5}\@etitle}
+    \fi
     \fancyhead[R]{\zihao{-5}\leftmark}
 
     % 居中式页眉，可以选择为论文题目或当前章
@@ -136,19 +245,13 @@
     \fancyhead[R]{\zihao{-5}ABSTRACT}
 }
 
-\fancypagestyle{listoffiguretable}{\fancyhead[R]{\zihao{-5}插图与表格目录}}
-
-% 表格与图片标题设定
-\renewcommand{\thefigure}{\thechapter-\arabic{figure}}
-\setlength\heavyrulewidth{0.2em}
-\captionsetup{font=small,format=hang}
-
-
-% 目录设定，使用tocloft宏包
-\setcounter{secnumdepth}{3} % depth of toc, 2
-\setcounter{tocdepth}{1}
-% 如果要在目录中显示子章节请换用下面这行(目录中显示到x.y.z章)，如果不用这行默认显示到x.y章。
-% \setcounter{tocdepth}{2}
+\fancypagestyle{listoffiguretable}{
+    \ifx \lang \sysucn
+    \fancyhead[R]{\zihao{-5}插图与表格目录}
+    \else
+    \fancyhead[R]{\zihao{-5}Figures and Tables Contents}
+    \fi
+    }
 
 % 目录标题：3号宋体加粗
 \renewcommand{\cfttoctitlefont}{\hfill\zihao{3}\songti\bfseries}
@@ -164,15 +267,16 @@
 \renewcommand{\cftsecpagefont}{\zihao{-4}\songti}
 \renewcommand{\cftsubsecfont}{\zihao{-4}\songti}
 \renewcommand{\cftsubsecpagefont}{\zihao{-4}\songti}
-\setlength{\cftsecindent}{2.3em}        % 小节缩进, 对齐章标题空隙
 
 % 插图目录
-\renewcommand{\listfigurename}{插图目录}
 \renewcommand{\cftfigfont}{\zihao{-4}\songti}
 \renewcommand{\cftfigpagefont}{\zihao{-4}\songti}
 
 % 表格目录
-\renewcommand{\listtablename}{表格目录}
+\renewcommand{\cfttabfont}{\zihao{-4}\songti}
+\renewcommand{\cfttabpagefont}{\zihao{-4}\songti}
+
+% 目录通用设置
 \renewcommand{\cfttabfont}{\zihao{-4}\songti}
 \renewcommand{\cfttabpagefont}{\zihao{-4}\songti}
 
@@ -182,35 +286,7 @@
 \renewcommand{\cftnodots}{\cftdotsep}     % 使用点指示页数
 
 \addtolength{\cftchapnumwidth}{3\ccwd}
-\newcommand\mybold[1]{\textit{\textbf{#1}}}
-
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newtheoremstyle{dotless}{3pt}{3pt}{\kaishu}{2em}{\heiti}{}{\ccwd}{}
-\theoremstyle{dotless}
-\newtheorem{theorem}{{定理}}[chapter]
-\newtheorem{proposition}{{命题}}[chapter]
-\newtheorem{lemma}{{引理}}[chapter]
-\newtheorem{corollary}{{推论}}[chapter]
-\newtheorem{definition}{{定义}}[chapter]
-\newtheorem{remark}{{注记}}[chapter]
-\newtheorem{eg}{例}[chapter]
-
-\renewcommand{\proofname}{{\heiti 证明}}
 \renewcommand{\@biblabel}[1]{[#1]\hfill}
-
-\renewenvironment{proof}[1][\proofname]{\par
-    \pushQED{\qed}
-    \kaishu \topsep6\p@\@plus6\p@\relax
-    \trivlist
-    \item[\hskip\labelsep
-                \itshape
-        #1]\ignorespaces
-}{
-    \popQED\endtrivlist\@endpefalse
-}
-
-% 参考文献引用标记格式：右上角，带方括号
-\RequirePackage[square,super]{natbib}
 
 % 相关信息宏定义
 \newcommand\ctitle[1]{\def\@ctitle{#1}}
@@ -227,6 +303,7 @@
 \newcommand\emajor[1]{\def\@emajor{#1}}
 \newcommand\cmentor[1]{\def\@cmentor{#1}}
 \newcommand\ementor[1]{\def\@ementor{#1}}
+\newcommand\ccity[1]{\def\@ccity{#1}}% 用于硕士博士论文中封面下面地址　
 
 \renewcommand\maketitle {
     \begin{titlepage}
@@ -497,7 +574,7 @@
             学生总结 \newline
             Student Self-Summary:
             \end{adjustwidth}
-            \@firstsummary
+            \@firstsummary 
             \begin{adjustwidth}{2em}{2em}
             指导教师意见 \newline
             Comments of Supervisor: \newline
@@ -760,7 +837,13 @@
     \pagenumbering{arabic}
     \ctexset {
         chapter = {
-            %fixskip = true,
+            % fixskip 必须更新宏包才可以使用
+           	% fixskip = true,
+            % 设置目录章的格式设置，number如果添加\chinese{chapter}会变成第一章一，不知道为什么
+            name = {\ifx \lang \sysuen Chapter \else 第{\chinese{chapter}}章 \fi},
+            number = {
+                \ifx \lang \sysuen \arabic{chapter}\fi
+                },
             beforeskip = {10pt},
             afterskip = {20pt},
             format = {\centering},
@@ -768,27 +851,30 @@
             titleformat = {\zihao{4}\heiti}
         },
         section = {
-            %fixskip = true,
+            % fixskip = true,
             beforeskip = {20pt},
             afterskip = {10pt},
             format = {},
             nameformat = {\zihao{4}\heiti},
-            titleformat = {\zihao{4}\heiti}
+            titleformat = {\zihao{4}\heiti},
+            indent = {0pt}
         },
         subsection = {
-            %fixskip = true,
+            % fixskip = true,
             beforeskip = {20pt},
             afterskip = {10pt},
             format = {},
             nameformat = {\zihao{4}\heiti},
-            titleformat = {\zihao{4}\heiti}
+            titleformat = {\zihao{4}\heiti},
+            indent = {0pt}
         },
         subsubsection = {
             beforeskip = {20pt},
             afterskip = {10pt},
             format = {},
             nameformat = {\zihao{4}\heiti},
-            titleformat = {\zihao{4}\heiti}
+            titleformat = {\zihao{4}\heiti},
+            indent = {0pt}
             % 按照中大规定的格式需要显示成a.b.c.d章，而不是(d)节
             % number = {(\arabic{subsubsection})}
         }
@@ -830,7 +916,11 @@
 \renewcommand\appendix{\par
     \@mainmattertrue
     \fancypagestyle{plain}{
+        \ifx \lang \sysucn
         \fancyhead[R]{\zihao{-5} 附录\thechapter \leftmark}
+        \else
+        \fancyhead[R]{\zihao{-5} Appendix\thechapter \leftmark}
+        \fi
     }
     \pagestyle{plain}
     \setcounter{chapter}{0}
@@ -930,6 +1020,9 @@
     \end{longtable}
     \newclearpage
 }
+\else
+\RequirePackage{packages/master}
+\fi
 
 % 配置超链接。
 % hyperref一般要求是导言区最后一个宏包，才能正常工作

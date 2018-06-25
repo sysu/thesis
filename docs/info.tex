@@ -11,7 +11,12 @@
 % 封面标题。由于技术所限，封面题目过长的划分交由用户您进行定夺
 % 这也能让您的论文封面看起来更有美感
 \covertitlefirst{中山大学}
-\covertitlesecond{本科毕业论文非正式模版}
+\covertitlesecond{
+    \ifx \degree \bachelor 本科\fi
+    \ifx \degree \master 硕士\fi
+    \ifx \degree \doctor 博士\fi
+    毕业论文非正式模版
+}
 
 % Author:   Souler Ou
 % 修改者:    欧一锋
@@ -28,7 +33,11 @@
 %}
 
 % 中文标题
-\ctitle{中山大学本科毕业论文非正式模版}
+\ctitle{中山大学
+\ifx \degree \bachelor 本科\fi
+\ifx \degree \master 硕士\fi
+\ifx \degree \doctor 博士\fi
+毕业论文非正式模版}
 \etitle{Unofficial \LaTeX\ Template for Undergraduate Thesis of SYSU}
 
 % 解决英文摘要页标题过长问题 (Issue 49&63)
@@ -52,3 +61,4 @@
 \cmentor{林倞\ 教授}
 \ementor{Prof. Lin Liang}
 
+\ccity{广州}
