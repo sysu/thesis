@@ -308,44 +308,44 @@
 \renewcommand\maketitle {
     \begin{titlepage}
         \begin{center}
-            \includegraphics[width=10cm]{image/SYSULogo} \\
-            \songti
-            \vspace{\baselineskip}
-            \zihao{-0}\textbf{本科生毕业论文（设计）} \\
-            \zihao{2}\textbf{\textrm{Undergraduate Graduation Thesis（Design）}} \\
-            \vspace{2\baselineskip}
-
-            {\fontsize{15}{10}\selectfont
-            \begin{tabular}{l}
-                    \makebox[2.7cm]{题目 Title:\hfill} \underline{\makebox[8.3cm]{\hfill\zihao{3}\songti\textbf\@covertitlefirst\hfill}}\\\vspace{1pt}\\
-                    \makebox[2.7cm]{\hfill} \underline{\makebox[8.3cm]{\hfill\zihao{3}\songti\textbf\@covertitlesecond\hfill}}\\\vspace{1pt}\\
-                    \vspace{8pt} \\
-                    院\hspace{0.5\ccwd}系\\
-                    \makebox[4.8cm]{School (Department):\hfill} \underline{\makebox[6.2cm]{\hfill\@cschool\hfill}}\\
-                    \vspace{8pt} \\
-                    专\hspace{0.5\ccwd}业\\
-                    \makebox[1.7cm]{Major:\hfill} \underline{\makebox[9.3cm]{\hfill\@cmajor\hfill}}\\
-                    \vspace{8pt} \\
-                    学生姓名 \\
-                    \makebox[3.4cm]{Student Name:\hfill} \underline{\makebox[7.6cm]{\hfill\@cauthor\hfill}}\\
-                    \vspace{8pt} \\
-                    学\hspace{0.5\ccwd}号 \\
-                    \makebox[3cm]{Student No.:\hfill} \underline{\makebox[8cm]{\hfill\@studentid\hfill}}\\
-                    \vspace{8pt} \\
-                    指导教师（职 称） \\
-                    \makebox[4cm]{Supervisor (Title):\hfill} \underline{\makebox[7cm]{\hfill\@cmentor\hspace{2.7cm}}}
-            \end{tabular}
+            \includegraphics[width=3.5cm]{image/SYSULogo2} \\
+            \setCJKfamilyfont{hzs}{STZhongsong}
+            \setCJKfamilyfont{hzsB}{STZhongsongB}
+            \CJKfamily{hzsB}
+            \vspace{-1em}
+            \zihao{-0}\textcolor[rgb]{0,0.337,0.153}{本科生毕业论文（设计）} \\
+            \fontsize{20}{24}\selectfont \textcolor[rgb]{0.427,0.42,0.4}{\textbf{\textrm{\hspace{-5pt}Undergraduate Graduation Thesis }}\hspace{-10pt}（\hspace{2pt}\textbf{\textrm{Design}}）} \\
+            \noindent\makebox[\linewidth]{\color[rgb]{0,0.337,0.153}\rule{\paperwidth}{4pt}}\\
+            \vspace{-1.35em}
+            \noindent\makebox[\linewidth]{\color[rgb]{0,0.337,0.153}\rule{\paperwidth}{1.2pt}}\\
+            \vspace{3em}
+            \CJKfamily{hzs}
+            {
+                \fontsize{15}{12}\selectfont
+                \hspace{-4em}  % 使整个表格向左移动一小段距离
+                \begin{tabular}{rr}
+                    题目\\Title\,& \underline{\makebox[8.3cm]{\hfill\zihao{3}\@covertitlefirst\hfill}}\vspace{10pt} \\
+                    & \underline{\makebox[8.3cm]{\hfill\zihao{3}\@covertitlesecond\hfill}}\vspace{10pt} \\
+                    院\hspace{0.5\ccwd}系\\School (Department) & \underline{\makebox[8.3cm]{\hfill\@cschool\hfill}}\vspace{10pt} \\
+                    专\hspace{0.5\ccwd}业\\Major & \underline{\makebox[8.3cm]{\hfill\@cmajor\hfill}}\vspace{10pt} \\
+                    学生姓名\\Student Name & \underline{\makebox[8.3cm]{\hfill\@cauthor\hfill}}\vspace{10pt} \\
+                    学\hspace{0.5\ccwd}号\\Student No & \underline{\makebox[8.3cm]{\hfill\@studentid\hfill}}\vspace{10pt} \\
+                    指导教师（职 称）\\Supervisor (Title) & \underline{\makebox[8.3cm]{\hfill\@cmentor\hfill}}\\
+                    
+                \end{tabular}
             }
             \vfill
-
+            
             \zihao{-3}
             {\centering
                 \ctexset{today=big}         % 汉字数字形式日期
-                时间：\today     \\ % 使用最后一次编译的日期, 实现日期的自动化
+                %时间：\today     \\ % 使用最后一次编译的日期, 实现日期的自动化
+                时间：\CJKunderline{\makebox[3cm]{二〇一九}}年\CJKunderline{\makebox[2cm]{十二}}月\CJKunderline{\makebox[2cm]{二十六}}日\\
                 % Date:\hspace{0.5\ccwd} Month\hspace{2\ccwd} Day\hspace{1\ccwd} Year
-                Date: \etoday % 英文日期自动化
+                %Date: \etoday % 英文日期自动化
+                Date: Month \underline{\makebox[1.2cm]{12}}Day\underline{\makebox[1.2cm]{26}}Year\underline{\makebox[2cm]{2019}}
             }
-
+            
         \end{center}
     \end{titlepage}
     \newclearpage
