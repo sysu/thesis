@@ -339,11 +339,11 @@
             \zihao{-3}
             {\centering
                 \ctexset{today=big}         % 汉字数字形式日期
-                %时间：\today     \\ % 使用最后一次编译的日期, 实现日期的自动化
-                时间：\CJKunderline{\makebox[3cm]{二〇一九}}年\CJKunderline{\makebox[2cm]{十二}}月\CJKunderline{\makebox[2cm]{二十六}}日\\
+                时间：\today     \\ % 使用最后一次编译的日期, 实现日期的自动化
+                %时间：\CJKunderline{\makebox[3cm]{二〇一九}}年\CJKunderline{\makebox[2cm]{十二}}月\CJKunderline{\makebox[2cm]{二十六}}日\\
                 % Date:\hspace{0.5\ccwd} Month\hspace{2\ccwd} Day\hspace{1\ccwd} Year
-                %Date: \etoday % 英文日期自动化
-                Date: Month \underline{\makebox[1.2cm]{12}}Day\underline{\makebox[1.2cm]{26}}Year\underline{\makebox[2cm]{2019}}
+                Date: \etoday % 英文日期自动化
+                %Date: Month \underline{\makebox[1.2cm]{12}}Day\underline{\makebox[1.2cm]{26}}Year\underline{\makebox[2cm]{2019}}
             }
             
         \end{center}
