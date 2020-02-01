@@ -119,8 +119,8 @@
 % 表格与图片标题设定
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
-\renewcommand\theequation{\arabic{chapter}-\arabic{equation}} 
-%\renewcommand\thealgorithm{\arabic{chapter}-\arabic{algorithm}} 
+\renewcommand\theequation{\arabic{chapter}-\arabic{equation}}
+%\renewcommand\thealgorithm{\arabic{chapter}-\arabic{algorithm}}
 
 \setlength\heavyrulewidth{0.2em}
 \captionsetup{font=small,format=hang}
@@ -157,9 +157,9 @@
 \newtheorem{conj}{猜想}[chapter]
 \newtheorem{case}{情形}
 
-\renewcommand{\contentsname}{目录}  
-\renewcommand{\figurename}{图}  
-\renewcommand{\tablename}{表}  
+\renewcommand{\contentsname}{目录}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
 \renewcommand{\bibname}{参考文献}
 \renewcommand{\appendixname}{附录}
 \renewcommand{\listfigurename}{插图目录}
@@ -177,9 +177,9 @@
 \newtheorem{eg}{eg}[chapter]
 \renewcommand{\proofname}{{Proof}}
 
-\renewcommand{\contentsname}{Contents}  
-\renewcommand{\figurename}{Figure}  
-\renewcommand{\tablename}{Table}  
+\renewcommand{\contentsname}{Contents}
+\renewcommand{\figurename}{Figure}
+\renewcommand{\tablename}{Table}
 \renewcommand{\bibname}{Reference}
 \renewcommand{\appendixname}{Appendix}
 \renewcommand{\listfigurename}{Figure Contents}
@@ -309,9 +309,7 @@
     \begin{titlepage}
         \begin{center}
             \includegraphics[width=3.5cm]{image/SYSULogo2} \\
-            \setCJKfamilyfont{hzs}{STZhongsong}
-            \setCJKfamilyfont{hzsB}{STZhongsongB}
-            \CJKfamily{hzsB}
+            \songti
             \vspace{-1em}
             \zihao{-0}\textcolor[rgb]{0,0.337,0.153}{本科生毕业论文（设计）} \\
             \fontsize{20}{24}\selectfont \textcolor[rgb]{0.427,0.42,0.4}{\textbf{\textrm{\hspace{-5pt}Undergraduate Graduation Thesis }}\hspace{-10pt}（\hspace{2pt}\textbf{\textrm{Design}}）} \\
@@ -331,11 +329,11 @@
                     学生姓名\\Student Name & \underline{\makebox[8.3cm]{\hfill\@cauthor\hfill}}\vspace{10pt} \\
                     学\hspace{0.5\ccwd}号\\Student No & \underline{\makebox[8.3cm]{\hfill\@studentid\hfill}}\vspace{10pt} \\
                     指导教师（职 称）\\Supervisor (Title) & \underline{\makebox[8.3cm]{\hfill\@cmentor\hfill}}\\
-                    
+
                 \end{tabular}
             }
             \vfill
-            
+
             \zihao{-3}
             {\centering
                 \ctexset{today=big}         % 汉字数字形式日期
@@ -345,7 +343,7 @@
                 Date: \etoday % 英文日期自动化
                 %Date: Month \underline{\makebox[1.2cm]{12}}Day\underline{\makebox[1.2cm]{26}}Year\underline{\makebox[2cm]{2019}}
             }
-            
+
         \end{center}
     \end{titlepage}
     \newclearpage
@@ -574,7 +572,7 @@
             学生总结 \newline
             Student Self-Summary:
             \end{adjustwidth}
-            \@firstsummary 
+            \@firstsummary
             \begin{adjustwidth}{2em}{2em}
             指导教师意见 \newline
             Comments of Supervisor: \newline
