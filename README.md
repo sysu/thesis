@@ -15,13 +15,14 @@ _注意:　最新代码在dev分支上, 获取代码前请先确认分支._
 1. 感谢[@guanyingc](https://github.com/guanyingc)师兄在模板结构化分解上作出了[极大的贡献](https://github.com/guanyingc/SYSU-LaTex-Thesis)
 1. 感谢@huangjj27师兄在模板样式规范化做出极大的贡献
 1. 感谢@a20185 @Kinpzz @yttty @perqin @noeagles 等人[对v4.6.0作出极大的贡献](https://gitlab.com/sysu-gitlab/latex-group/thesis/merge_requests/32)
+1. 感谢@the-1000th-summer [提供2020年本科毕业论文封面](https://gitlab.com/sysu-gitlab/latex-group/thesis/-/merge_requests/39)
 1. PPT的模板源自<http://far.tooold.cn/post/latex/beamertsinghua>
-1. 最后, 感谢Donald Ervin Knuth教授发明了`tex`这么好(zhe)用(teng)的工具  
+1. 最后, 感谢Donald Ervin Knuth教授发明了`tex`这么好(zhe)用(teng)的工具
     Finally, thanks Pro. Donald Ervin Knuth for inventing such useful tool as tex.
 
 ## 错误反馈以及改进
 1. 同学们如果在编译或者使用过程中遇到了一些问题，请参照[这里](ihttps://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)的步骤尝试解决问题。如果还是没法解决，请[email](mailto:incoming+sysu-gitlab/latex-group/thesis@gitlab.com)汇报错误。
-1. 如果您想参与项目的维护，我们强烈建议您发起访问请求(Access request)到本项目，即可成为本项目的开发人员! 我们**_非常欢迎校友的加入_**  
+1. 如果您想参与项目的维护，我们强烈建议您发起访问请求(Access request)到本项目，即可成为本项目的开发人员! 我们**_非常欢迎校友的加入_**
     或者，克隆本仓库到您的gitlab仓库中，修改完成后给本项目提交`Merge Request`
 
 ## 声明
