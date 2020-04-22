@@ -322,8 +322,8 @@
                 \fontsize{15}{12}\selectfont
                 \hspace{-4em}  % 使整个表格向左移动一小段距离
                 \begin{tabular}{rr}
-                    题目\\Title\,& \underline{\makebox[8.3cm]{\hfill\zihao{3}\@covertitlefirst\hfill}}\vspace{10pt} \\
-                    & \underline{\makebox[8.3cm]{\hfill\zihao{3}\@covertitlesecond\hfill}}\vspace{10pt} \\
+                    题目\\Title\,& \underline{\makebox[8.3cm]{\hfill\zihao{3}\bfseries\@covertitlefirst\hfill}}\vspace{10pt} \\
+                    & \underline{\makebox[8.3cm]{\hfill\zihao{3}\bfseries\@covertitlesecond\hfill}}\vspace{10pt} \\
                     院\hspace{0.5\ccwd}系\\School (Department) & \underline{\makebox[8.3cm]{\hfill\@cschool\hfill}}\vspace{10pt} \\
                     专\hspace{0.5\ccwd}业\\Major & \underline{\makebox[8.3cm]{\hfill\@cmajor\hfill}}\vspace{10pt} \\
                     学生姓名\\Student Name & \underline{\makebox[8.3cm]{\hfill\@cauthor\hfill}}\vspace{10pt} \\
@@ -763,7 +763,7 @@
     %\end{flushleft}
 
     % 或者只要一个醒目的标题
-    \centerline{\songti\zihao{3}\bfseries{\@ctitle}}
+    % \centerline{\songti\zihao{3}\bfseries{\@ctitle}}
 
     \zihao{5}\kaishu
     \paragraph{\zihao{5}\heiti【摘\hspace{\ccwd}要】}
@@ -797,14 +797,14 @@
     %\end{flushleft}
 
     %\centerline{\zihao{3}\bfseries{\@etitle}}
-    \centerline{\zihao{3}\bfseries{\@eabstracttitlefirst}}
-    \centerline{\zihao{3}\bfseries{\@eabstracttitlesecond}}
+    %\centerline{\zihao{3}\bfseries{\@eabstracttitlefirst}}
+    %\centerline{\zihao{3}\bfseries{\@eabstracttitlesecond}}
 
     \zihao{-4}
-    \paragraph{\zihao{4}\textbf{【Abstract】}}
+    \paragraph{\zihao{-4}\textbf{【Abstract】}}
     \@eabstract
     \vspace{\baselineskip}
-    \paragraph{\zihao{4}\textbf{【Keywords】}}
+    \paragraph{\zihao{-4}\textbf{【Keywords】}}
     \@ekeywords
 }
 
@@ -852,7 +852,7 @@
             % fixskip = true,
             beforeskip = {20pt},
             afterskip = {10pt},
-            format = {},
+            format = {\zihao{4}\heiti},
             nameformat = {\zihao{4}\heiti},
             titleformat = {\zihao{4}\heiti},
             indent = {0pt}
@@ -861,7 +861,7 @@
             % fixskip = true,
             beforeskip = {20pt},
             afterskip = {10pt},
-            format = {},
+            format = {\zihao{4}\heiti},
             nameformat = {\zihao{4}\heiti},
             titleformat = {\zihao{4}\heiti},
             indent = {0pt}
@@ -869,7 +869,7 @@
         subsubsection = {
             beforeskip = {20pt},
             afterskip = {10pt},
-            format = {},
+            format = {\zihao{4}\heiti},
             nameformat = {\zihao{4}\heiti},
             titleformat = {\zihao{4}\heiti},
             indent = {0pt}
